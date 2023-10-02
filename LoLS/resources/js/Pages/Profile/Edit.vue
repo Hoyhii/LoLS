@@ -13,10 +13,34 @@ defineProps({
         type: String,
     },
 });
+
+let updateProfile = true;
+let updatePassword = false;
+let deleteUser = false;
+
+let updatingProfile = () => {
+    updateProfile = true;
+    updatePassword = false;
+    deleteUser = false;
+};
+let updatingPassword = () => {
+    updateProfile = false;
+    updatePassword = true;
+    deleteUser = false;
+};
+let deletingUser = () => {
+    updateProfile = false;
+    updatePassword = false;
+    deleteUser = true;
+};
 </script>
 
 <template>
     <Head title="Profile" />
+
+    <button @click="updatingProfile">Update Profile</button>
+    <button @click="updatingPassword">Update Password</button>
+    <button @click="deletingUser">Delete User</button>
 
     <AuthenticatedLayout>
         <template #header>
@@ -25,7 +49,7 @@ defineProps({
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div v-if="updateProfile" class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
@@ -33,11 +57,11 @@ defineProps({
                     />
                 </div>
 
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div v-if="updatePassword" class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <UpdatePasswordForm class="max-w-xl" />
                 </div>
 
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div v-if="deleteUser" class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <DeleteUserForm class="max-w-xl" />
                 </div>
             </div>
