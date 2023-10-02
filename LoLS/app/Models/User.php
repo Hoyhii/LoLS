@@ -13,15 +13,23 @@ class User extends Authenticatable //implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    public function summoner_names(){
+        return $this->hasMany(Summoner::class)->orderBy('created_at');
+    }
+
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
         'password',
+        'country',
+        'role',
+        'team',
+        'youtube',
+        'twitch',
+        'discord',
+        'twitter',
+        'leaguepedia',
     ];
 
     /**

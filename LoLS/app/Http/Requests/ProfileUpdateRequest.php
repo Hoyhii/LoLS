@@ -18,6 +18,14 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['string', 'max:255'],
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'country' => ['required','string','max:255'],
+            'role' => ['required','string','max:10'],
+            'team' => ['nullable','string','max:255'],
+            'youtube' => ['nullable','string','max:255'],
+            'twitch' => ['nullable','string','max:255'],
+            'discord' => ['nullable','string','max:255'],
+            'twitter' => ['nullable','string','max:255'],
+            'leaguepedia' => ['nullable','string','max:255'],
         ];
     }
 }

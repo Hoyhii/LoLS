@@ -17,6 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string("country");
+            $table->string("role");
+            $table->string("team")->nullable();
+            $table->string("youtube")->nullable();
+            $table->string("twitch")->nullable();
+            $table->string("discord")->nullable();
+            $table->string("twitter")->nullable();
+            $table->string("leaguepedia")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

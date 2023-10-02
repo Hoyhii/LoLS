@@ -19,6 +19,8 @@ const user = usePage().props.auth.user;
 const form = useForm({
     name: user.name,
     email: user.email,
+    country: user.country,
+    role: user.role,
 });
 </script>
 
@@ -62,6 +64,38 @@ const form = useForm({
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div>
+                <InputLabel for="country" value="Country" />
+
+                <TextInput
+                    id="country"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.country"
+                    required
+                    autofocus
+                    autocomplete="country"
+                />
+
+                <InputError class="mt-2" :message="form.errors.country" />
+            </div>
+
+            <div>
+                <InputLabel for="role" value="Role" />
+
+                <TextInput
+                    id="role"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.role"
+                    required
+                    autofocus
+                    autocomplete="role"
+                />
+
+                <InputError class="mt-2" :message="form.errors.role" />
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
