@@ -20,11 +20,11 @@ const currentTab = ref('UpdateProfileInformationForm')
 
 const tabs = {
     UpdateProfileInformationForm,
+    UpdateSocials,
     UpdatePasswordForm,
     DeleteUserForm,
-    UpdateSocials
 }
-const tabNames = ref(["Update Profile","Update Password","Delete user","Socials"])
+const tabNames = ref(["Update Profile","Socials","Update Password","Delete user"])
 
 </script>
 
