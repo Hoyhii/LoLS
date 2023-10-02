@@ -4,6 +4,7 @@ import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 defineProps({
     mustVerifyEmail: {
@@ -14,57 +15,38 @@ defineProps({
     },
 });
 
-let updateProfile = true;
-let updatePassword = false;
-let deleteUser = false;
+const currentTab = ref('UpdateProfileInformationForm')
 
-let updatingProfile = () => {
-    updateProfile = true;
-    updatePassword = false;
-    deleteUser = false;
-};
-let updatingPassword = () => {
-    updateProfile = false;
-    updatePassword = true;
-    deleteUser = false;
-};
-let deletingUser = () => {
-    updateProfile = false;
-    updatePassword = false;
-    deleteUser = true;
-};
+const tabs = {
+    UpdateProfileInformationForm,
+    UpdatePasswordForm,
+    DeleteUserForm
+}
+
+
 </script>
 
 <template>
     <Head title="Profile" />
-
-    <button @click="updatingProfile">Update Profile</button>
-    <button @click="updatingPassword">Update Password</button>
-    <button @click="deletingUser">Delete User</button>
-
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Profile</h2>
         </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div v-if="updateProfile" class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                    <UpdateProfileInformationForm
-                        :must-verify-email="mustVerifyEmail"
-                        :status="status"
-                        class="max-w-xl"
-                    />
-                </div>
-
-                <div v-if="updatePassword" class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                    <UpdatePasswordForm class="max-w-xl" />
-                </div>
-
-                <div v-if="deleteUser" class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                    <DeleteUserForm class="max-w-xl" />
+                <button class="px-5"
+                    v-for="(_, tab) in tabs"
+                    :key="tab"
+                    :class="['tab-button', { active: currentTab === tab }]"
+                    @click="currentTab = tab"
+                >
+                    {{tab}}
+                </button>
+                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <component :is="tabs[currentTab]" class="tab"></component>
                 </div>
             </div>
         </div>
+
     </AuthenticatedLayout>
 </template>
