@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LadderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,14 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/front', function () {
+    return Inertia::render('FrontPage');
+});
+
+Route::get('/ladders', function () {
+    return Inertia::render('Ladders');
 });
 
 Route::get('/dashboard', function () {

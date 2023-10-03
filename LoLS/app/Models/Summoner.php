@@ -9,7 +9,7 @@ class Summoner extends Model
 {
     use HasFactory;
 
-    protected $table = 'summoner_names';
+    protected $table = 'summoners';
     public function user(){
         return $this->belongsTo(User::class);
     }
