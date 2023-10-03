@@ -119,7 +119,11 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
-
+            <div class="flex items-center justify-center mt-4">
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Register
+                </PrimaryButton>
+            </div>
             <div class="flex items-center justify-center mt-4">
                 <Link
                     :href="route('login')"
@@ -128,11 +132,7 @@ const submit = () => {
                     Already registered?
                 </Link>
             </div>
-                <div class="flex items-center justify-center mt-4">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
+
         </form>
     </GuestLayout>
 </template>
