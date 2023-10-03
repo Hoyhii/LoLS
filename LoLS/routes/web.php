@@ -26,13 +26,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/front', function () {
-    return Inertia::render('FrontPage');
-});
+Route::get('/front', [LadderController::class, 'frontpage'])->name('frontpage');
 
-Route::get('/ladders', function () {
-    return Inertia::render('Ladders');
-});
+Route::get('/ladders', [LadderController::class, 'ladder'])->name('ladders');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
