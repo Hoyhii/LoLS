@@ -1,6 +1,6 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import GuestLayout from "@/Layouts/GuestLayout.vue";
 
 defineProps({ //
 });
@@ -8,10 +8,9 @@ defineProps({ //
 
 <template>
     <Head title="Ladders" />
-    <AuthenticatedLayout>
+    <GuestLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Ladders</h2>
         </template>
-
-    </AuthenticatedLayout>
+    </GuestLayout>
 </template>

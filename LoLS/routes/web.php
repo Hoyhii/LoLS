@@ -17,7 +17,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -26,7 +26,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/front', [LadderController::class, 'frontpage'])->name('frontpage');
+Route::get('/', [LadderController::class, 'frontpage'])->name('frontpage');
 
 Route::get('/ladders', [LadderController::class, 'ladder'])->name('ladders');
 
