@@ -8,17 +8,19 @@ use App\Http\Requests\StoreSummonerRequest;
 use App\Http\Requests\UpdateSummonerRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
 
 class SummonerController extends Controller
 {
     public function create()
     {
         $user = auth()->user();
+        $summoners = $user->summoner_names;
         $regions = [
             'euw1' => 'EUW',
             'eun1' => 'EUNE',
             'na1' => 'NA',
-            'kr' => 'kr',
+            'kr' => 'KR',
             'br1' => 'BR',
             'la1' => 'LAN',
             'la2' => 'LAS',
@@ -31,11 +33,14 @@ class SummonerController extends Controller
             'tw2' => 'TW',
             'vn2' => 'VN',
         ];
-        return view('summoner.create',compact('user','regions'));
+
+        return Inertia::render('Profile/Summoner', [
+            'summoners' => $summoners,
+            'regions' => $regions,
+        ]);
     }
     public function store(StoreSummonerRequest $request)
     {
-        $user = auth()->user();
         $data = request()->validate([
             'summoner_name' => 'required|string|max:255',
             'region' => 'required|string|max:10',
@@ -77,7 +82,7 @@ class SummonerController extends Controller
             'losses' => $losses,
         ]);
 
-        return redirect("/player/{$user->id}/profile")->with('success', 'Summoner added successfully.');
+        return redirect("/profile")->with('success', 'Summoner added successfully.');
     }
     public function edit($id)
     {
@@ -86,7 +91,7 @@ class SummonerController extends Controller
             'euw1' => 'EUW',
             'eun1' => 'EUNE',
             'na1' => 'NA',
-            'kr' => 'kr',
+            'kr' => 'KR',
             'br1' => 'BR',
             'la1' => 'LAN',
             'la2' => 'LAS',
@@ -102,8 +107,7 @@ class SummonerController extends Controller
 
         $summoner_name = Summoner::findOrFail($id);
 
-        $defaultRegion = $summoner_name->region;
-        return view('summoner.edit', compact('summoner_name','regions','defaultRegion'));
+        return Inertia::render('EditSummoner', compact('summoner_name', 'regions'));
     }
     public function update(Request $request, $id)
     {
