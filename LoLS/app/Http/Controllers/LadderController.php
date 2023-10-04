@@ -14,19 +14,23 @@ class LadderController extends Controller
     public function ladder(){
         $summoners = Summoner::all();
         $users = User::all();
-        $IsLoggedIn = auth()->check();
+        $isLoggedIn = auth()->check();
         return Inertia::render('Ladders',
             [   'summoners' => $summoners,
                 'users' => $users,
-                'isLoggedIn' => $IsLoggedIn
+                'isLoggedIn' => $isLoggedIn
             ]);
     }
 
     public function frontpage(){
         $summoners = Summoner::all();
         $users = User::all();
-        $IsLoggedIn = auth()->check();
-        return Inertia::render('FrontPage',compact('summoners','users','IsLoggedIn'));
+        $isLoggedIn = auth()->check();
+        return Inertia::render('FrontPage',
+            [   'summoners' => $summoners,
+                'users' => $users,
+                'isLoggedIn' => $isLoggedIn
+            ]);
     }
 
 }

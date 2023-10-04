@@ -34,10 +34,10 @@ defineProps({
                                 </NavLink>
                             </div>
                         </div>
-                        <div v-if="isLoggedIn" class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
                             <div class="ml-3 relative">
-                                <Dropdown align="right" width="48">
+                                <Dropdown v-if="$page.props.isLoggedIn" align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
@@ -61,7 +61,6 @@ defineProps({
                                             </button>
                                         </span>
                                     </template>
-
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
@@ -69,22 +68,20 @@ defineProps({
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
+                                <template v-else>
+                                    <Link
+                                        :href="route('login')"
+                                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                    >Log in</Link>
+
+                                    <Link
+                                        :href="route('register')"
+                                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                    >Register</Link>
+                                </template>
                             </div>
-
                         </div>
-                        <template v-else>
-                            <Link
-                                :href="route('login')"
-                                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >Log in</Link>
-
-                            <Link
-                                :href="route('register')"
-                                class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                            >Register</Link>
-                        </template>
                         </div>
-
                     </div>
             </nav>
 
