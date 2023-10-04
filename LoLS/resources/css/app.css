@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-main {
+    --bs-bg-opacity: 1;
+    background-color: #6B728E!important;
+    color: white
+}
+
+.bg-header {
+    --bs-bg-opacity: 1;
+    background-color: #50577A !important;
+    color: white;
+}
+.bg-div {
+       --bs-bg-opacity: 1;
+       background-color: #474E68  !important;
+}
+.bg-button{
+    --bs-bg-opacity: 1;
+    background-color: #404258  !important;
+}
