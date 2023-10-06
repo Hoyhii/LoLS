@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSummonerNameRequest;
 use App\Models\Summoner;
 use App\Http\Requests\StoreSummonerRequest;
 use Illuminate\Http\Request;
@@ -135,7 +134,8 @@ class SummonerController extends Controller
             'vn2' => 'VN',
         ];
 
-        $summonerData = Summoner::all();
+        $user = auth()->user();
+        $summonerData = $user->summoner_names;
         $currentPage = 'Edit Summoner';
 
         return Inertia::render('EditSummoner', compact('summonerData', 'regions','currentPage'));

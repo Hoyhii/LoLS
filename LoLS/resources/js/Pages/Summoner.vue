@@ -1,7 +1,7 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { InertiaLink } from '@inertiajs/inertia-vue3';
 
 defineProps({
     currentPage: String,
@@ -9,12 +9,12 @@ defineProps({
 </script>
 
 <template>
-    <component :is="isLoggedIn ? AuthenticatedLayout : GuestLayout">
+    <AuthenticatedLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <nav>
-                    <Link :href="route('summoner.create')" class="px-5 text-lg font-medium text-gray-900 dark:text-gray-100">Add new Summoner</Link>
-                    <Link :href="route('summoner.edit')" class="px-5 text-lg font-medium text-gray-900 dark:text-gray-100">Edit summoners</Link>
+                    <InertiaLink :href="route('summoner.create')" class="px-5 text-lg font-medium text-gray-900 dark:text-gray-100">Add new Summoner</InertiaLink>
+                    <InertiaLink :href="route('summoner.edit')" class="px-5 text-lg font-medium text-gray-900 dark:text-gray-100">Edit summoners</InertiaLink>
                 </nav>
 
                 <article class="mt-10">
@@ -22,5 +22,5 @@ defineProps({
                 </article>
             </div>
         </div>
-    </component>
+    </AuthenticatedLayout>
 </template>
