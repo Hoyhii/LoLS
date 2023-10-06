@@ -4,17 +4,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 import { createApp, h } from 'vue';
+import { InertiaProgress } from "@inertiajs/progress";
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+InertiaProgress.init()
+
+const appName = import.meta.env.VITE_APP_NAME || 'LoLStars';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
+            .mixin({ methods: { route } })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .mount(el);

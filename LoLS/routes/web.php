@@ -39,12 +39,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/summoner/index', [SummonerController::class, 'index'])->name('summoner.index');
     Route::get('/summoner/create', [SummonerController::class, 'create'])->name('summoner.create');
     Route::post('/summoner', [SummonerController::class, 'store'])->name('summoner.store')->middleware('auth');
-    Route::get('/summoner/{id}', [SummonerController::class, 'edit'])->name('summoner.edit');
+    Route::get('/summoner/{id}/edit', [SummonerController::class, 'edit'])->name('summoner.edit');
     Route::put('/summoner', [SummonerController::class, 'update'])->name('summoner.update');
-    Route::delete('/summoner', [SummonerController::class, 'destroy'])->name('summoner.destroy');
+    Route::delete('/summoner/{id}', [SummonerController::class, 'destroy'])->name('summoner.destroy');
+    // Add other routes as needed
 });
 
 require __DIR__.'/auth.php';

@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSummonerNameRequest;
 use App\Models\Summoner;
 use App\Http\Requests\StoreSummonerRequest;
-use App\Http\Requests\UpdateSummonerRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
 class SummonerController extends Controller
 {
-    public function create()
+    public function index()
     {
         $user = auth()->user();
         $summoners = $user->summoner_names;
@@ -34,9 +33,38 @@ class SummonerController extends Controller
             'vn2' => 'VN',
         ];
 
-        return Inertia::render('Profile/Summoner', [
+        return Inertia::render('Summoner', [
             'summoners' => $summoners,
             'regions' => $regions,
+        ]);
+    }
+    public function create()
+    {
+        $user = auth()->user();
+        $summoners = $user->summoner_names;
+        $currentPage = 'Add Summoner';
+        $regions = [
+            'euw1' => 'EUW',
+            'eun1' => 'EUNE',
+            'na1' => 'NA',
+            'kr' => 'KR',
+            'br1' => 'BR',
+            'la1' => 'LAN',
+            'la2' => 'LAS',
+            'oc1' => 'OCE',
+            'ru1' => 'RU',
+            'tr1' => 'TR',
+            'jp1' => 'JP',
+            'ph2' => 'PH',
+            'sg2' => 'SG',
+            'tw2' => 'TW',
+            'vn2' => 'VN',
+        ];
+
+        return Inertia::render('AddSummoner', [
+            'summoners' => $summoners,
+            'regions' => $regions,
+            'currentPage'=> $currentPage,
         ]);
     }
     public function store(StoreSummonerRequest $request)
@@ -106,8 +134,9 @@ class SummonerController extends Controller
         ];
 
         $summoner_name = Summoner::findOrFail($id);
+        $currentPage = 'Edit Summoner';
 
-        return Inertia::render('EditSummoner', compact('summoner_name', 'regions'));
+        return Inertia::render('EditSummoner', compact('summoner_name', 'regions','currentPage'));
     }
     public function update(Request $request, $id)
     {
