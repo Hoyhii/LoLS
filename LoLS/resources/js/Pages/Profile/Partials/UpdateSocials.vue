@@ -24,9 +24,9 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Socials</h2>
+            <h2 class="text-lg font-medium text-white text-white">Socials</h2>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            <p class="mt-1 text-smtext-white">
                 Update your account's socials.
             </p>
         </header>
@@ -116,7 +116,7 @@ const form = useForm({
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-white">Saved.</p>
                 </Transition>
             </div>
         </form>
