@@ -3,22 +3,34 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { useForm, usePage } from '@inertiajs/vue3';
 import SelectInput from "@/Components/SelectInput.vue";
 import Summoner from "@/Pages/Summoner.vue"
+import {ref} from "vue";
 
 defineProps({
-    currentPage:String,
+    currentPage: String,
 })
 
-const summoner_name = usePage().props.summoner_name;
+const summonerData = usePage().props.summonerData;
 const regions = usePage().props.regions;
-const defaultRegion = usePage().props.defaultRegion;
+
+const selectedSummonerIndex = ref(0);
 
 const form = useForm({
-    summoner_name: summoner_name.summoner_name,
-    region: summoner_name.region,
+    summoner_name: summonerData[0].summoner_name,
+    region: summonerData[0].region,
 });
+
+
+console.log('summonerData:', summonerData);
+console.log('regions:', regions);
+
+const selectSummoner = (index) => {
+    selectedSummonerIndex.value = index;
+    form.summoner_name = summonerData[index].summoner_name;
+    form.region = summonerData[index].region;
+}
 </script>
 
 <template>
@@ -32,7 +44,19 @@ const form = useForm({
                 </p>
             </header>
 
-            <form @submit.prevent="form.put(route('summoner.update', summoner_name.id))" class="mt-6 space-y-6">
+            <div class="flex flex-wrap gap-2">
+                <button
+                    v-for="(summoner, index) in summonerData"
+                    :key="summoner.id"
+                    @click="selectSummoner(index)"
+                    :class="{ 'bg-blue-500': index === selectedSummonerIndex, 'bg-gray-300 hover:bg-gray-400': index !== selectedSummonerIndex }"
+                    class="py-2 px-4 rounded-md text-white font-medium"
+                >
+                    {{ summoner.summoner_name }}
+                </button>
+            </div>
+
+            <form @submit.prevent="form.put(route('summoner.update', {id: summonerData[selectedSummonerIndex].id}))" class="mt-6 space-y-6">
                 <div>
                     <InputLabel for="summoner_name" value="Summoner Name" />
 

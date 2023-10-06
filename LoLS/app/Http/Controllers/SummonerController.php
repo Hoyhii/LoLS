@@ -112,7 +112,7 @@ class SummonerController extends Controller
 
         return redirect("/profile")->with('success', 'Summoner added successfully.');
     }
-    public function edit($id)
+    public function edit()
     {
 
         $regions = [
@@ -133,10 +133,10 @@ class SummonerController extends Controller
             'vn2' => 'VN',
         ];
 
-        $summoner_name = Summoner::findOrFail($id);
+        $summonerData = Summoner::all();
         $currentPage = 'Edit Summoner';
 
-        return Inertia::render('EditSummoner', compact('summoner_name', 'regions','currentPage'));
+        return Inertia::render('EditSummoner', compact('summonerData', 'regions','currentPage'));
     }
     public function update(Request $request, $id)
     {
@@ -183,7 +183,7 @@ class SummonerController extends Controller
 
 
 
-        return redirect("/player/{$user->id}/profile")
+        return redirect("/summoner/edit")
             ->with('success', 'Summoner details changed successfully.');
     }
     public function destroy(int $id)

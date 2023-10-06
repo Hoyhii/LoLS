@@ -46,8 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/summoner/index', [SummonerController::class, 'index'])->name('summoner.index');
     Route::get('/summoner/create', [SummonerController::class, 'create'])->name('summoner.create');
     Route::post('/summoner', [SummonerController::class, 'store'])->name('summoner.store')->middleware('auth');
-    Route::get('/summoner/{id}/edit', [SummonerController::class, 'edit'])->name('summoner.edit');
-    Route::put('/summoner', [SummonerController::class, 'update'])->name('summoner.update');
+    Route::get('/summoner/edit', [SummonerController::class, 'edit'])->name('summoner.edit');
+    Route::put('/summoner/{id}', [SummonerController::class, 'update'])->name('summoner.update');
     Route::delete('/summoner/{id}', [SummonerController::class, 'destroy'])->name('summoner.destroy');
     // Add other routes as needed
 });
