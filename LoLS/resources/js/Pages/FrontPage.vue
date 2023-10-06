@@ -1,14 +1,17 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
-defineProps({ //
-});
+defineProps({
+    isLoggedIn: {
+        type: Boolean,
+    }});
 </script>
 
 <template>
     <Head title="Welcome" />
-    <GuestLayout>
+    <component :is="isLoggedIn ? AuthenticatedLayout : GuestLayout">
         <div class="container-fluid bg-main">
             <div class="row justify-content-center text-center pt-4">
                 <div class="col col-lg-1 col-6 card bg-div text-white">
@@ -49,6 +52,6 @@ defineProps({ //
             </div>
         </div>
 
-    </GuestLayout>
+    </component>
 
 </template>

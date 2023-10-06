@@ -18,9 +18,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $isLoggedIn = auth()->check();
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'isLoggedIn' => $isLoggedIn,
         ]);
     }
 
@@ -60,4 +62,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
 }
