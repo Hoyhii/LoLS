@@ -31,11 +31,13 @@ const submit = () => {
 
 <template>
     <Summoner :current-page="currentPage">
+        <div class="p-4 sm:p-8 bg-div text-white shadow sm:rounded-lg">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <section>
             <header>
-                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Add Summoner</h2>
+                <h2 class="text-lg font-medium text-white">Add Summoner</h2>
 
-                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                <p class="mt-1 text-sm text-white">
                     Add new Summoner to your account.
                 </p>
             </header>
@@ -58,9 +60,9 @@ const submit = () => {
                 </div>
 
                 <div>
-                    <InputLabel for="region" value="Region" />
+                    <InputLabel for="region" value="Region" class="pb-1"/>
 
-                    <SelectInput id="region" v-model="form.region" :options="regions" />
+                    <SelectInput id="region" v-model="form.region" :options="regions"  class="bg-button" />
 
                     <p>Selected Option: {{ form.region }}</p>
 
@@ -76,11 +78,15 @@ const submit = () => {
                         leave-active-class="transition ease-in-out"
                         leave-to-class="opacity-0"
                     >
-                        <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Summoner Added.</p>
+                        <p v-if="form.recentlySuccessful" class="text-sm text-white">Summoner Added.</p>
                     </Transition>
                 </div>
-
             </form>
+
         </section>
+            </div>
+        </div>
     </Summoner>
+
 </template>
+

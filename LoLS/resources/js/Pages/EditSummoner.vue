@@ -35,11 +35,13 @@ const selectSummoner = (index) => {
 
 <template>
     <Summoner :current-page="currentPage">
+        <div class="p-4 sm:p-8 bg-div text-white shadow sm:rounded-lg">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <section>
             <header>
-                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Summoner Information</h2>
+                <h2 class="text-lg font-medium text-white">Summoner Information</h2>
 
-                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                <p class="mt-1 text-sm text-white">
                     Update your summoner's information.
                 </p>
             </header>
@@ -49,7 +51,7 @@ const selectSummoner = (index) => {
                     v-for="(summoner, index) in summonerData"
                     :key="summoner.id"
                     @click="selectSummoner(index)"
-                    :class="{ 'bg-blue-500': index === selectedSummonerIndex, 'bg-gray-300 hover:bg-gray-400': index !== selectedSummonerIndex }"
+                    :class="{ 'bg-indigo-500': index === selectedSummonerIndex, 'bg-div hover:bg-gray-400': index !== selectedSummonerIndex }"
                     class="py-2 px-4 rounded-md text-white font-medium"
                 >
                     {{ summoner.summoner_name }}
@@ -74,11 +76,12 @@ const selectSummoner = (index) => {
                 </div>
 
                 <div>
-                    <InputLabel for="region" value="Region" />
+                    <InputLabel for="region" value="Region" class="pb-2"/>
 
                     <SelectInput
                         v-model="form.region"
                         :options="regions"
+                        class="bg-button"
                     />
 
                     <InputError class="mt-2" :message="form.errors.region" />
@@ -93,10 +96,12 @@ const selectSummoner = (index) => {
                         leave-active-class="transition ease-in-out"
                         leave-to-class="opacity-0"
                     >
-                        <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        <p v-if="form.recentlySuccessful" class="text-sm text-white">Saved.</p>
                     </Transition>
                 </div>
             </form>
         </section>
+            </div>
+        </div>
     </Summoner>
 </template>
