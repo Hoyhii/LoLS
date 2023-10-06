@@ -1,4 +1,5 @@
 <script setup>
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
@@ -8,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <component :is="isLoggedIn ? AuthenticatedLayout : GuestLayout">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <nav>
@@ -21,5 +22,5 @@ defineProps({
                 </article>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </component>
 </template>

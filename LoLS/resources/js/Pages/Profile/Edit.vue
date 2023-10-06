@@ -1,4 +1,5 @@
 <script setup>
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
@@ -13,6 +14,9 @@ defineProps({
     },
     status: {
         type: String,
+    },
+    isLoggedIn: {
+        type: Boolean,
     },
 });
 
@@ -30,7 +34,7 @@ const tabNames = ref(["Update Profile","Socials","Update Password","Delete user"
 
 <template>
     <Head title="Profile" />
-    <AuthenticatedLayout>
+    <component :is="isLoggedIn ? AuthenticatedLayout : GuestLayout">
         <div class="py-2">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <button class="px-5 text-lg font-medium text-white"
@@ -46,5 +50,5 @@ const tabNames = ref(["Update Profile","Socials","Update Password","Delete user"
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </component>
 </template>

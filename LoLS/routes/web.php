@@ -32,8 +32,12 @@ Route::get('/', [LadderController::class, 'frontpage'])->name('frontpage');
 Route::get('/ladders', [LadderController::class, 'ladder'])->name('ladders');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $isLoggedIn = auth()->check();
+
+    return Inertia::render('Dashboard', [
+        'isLoggedIn' => $isLoggedIn,
+    ]);
+})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

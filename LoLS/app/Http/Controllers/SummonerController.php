@@ -14,6 +14,7 @@ class SummonerController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $isLoggedIn = auth()->check();
         $summoners = $user->summoner_names;
         $regions = [
             'euw1' => 'EUW',
@@ -36,6 +37,7 @@ class SummonerController extends Controller
         return Inertia::render('Summoner', [
             'summoners' => $summoners,
             'regions' => $regions,
+            'isLoggedIn' => $isLoggedIn
         ]);
     }
     public function create()

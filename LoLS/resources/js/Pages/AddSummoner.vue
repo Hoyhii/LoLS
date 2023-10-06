@@ -16,6 +16,10 @@ const regions = usePage().props.regions;
 
 defineProps({
     currentPage:String,
+
+    isLoggedIn: {
+        type: Boolean,
+    }
 })
 const submit = () => {
     form.post(route('summoner.store'), {
